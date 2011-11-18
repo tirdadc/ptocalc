@@ -1,88 +1,109 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset='utf-8'>
-
-  <title>tirdadc/ptocalc @ GitHub</title>
-
-  <style type="text/css">
-    body {
-      margin-top: 1.0em;
-      background-color: #ffffff;
-      font-family: Helvetica, Arial, FreeSans, san-serif;
-      color: #000000;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-    h1 { font-size: 3.8em; color: #000000; margin-bottom: 3px; }
-    h1 .small { font-size: 0.4em; }
-    h1 a { text-decoration: none }
-    h2 { font-size: 1.5em; color: #000000; }
-    h3 { text-align: center; color: #000000; }
-    a { color: #000000; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-    pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-  </style>
-</head>
-
-<body>
-  <a href="https://github.com/tirdadc/ptocalc"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
-
-  <div id="container">
-
-    <div class="download">
-      <a href="https://github.com/tirdadc/ptocalc/zipball/master">
-        <img border="0" width="90" src="https://github.com/images/modules/download/zip.png"></a>
-      <a href="https://github.com/tirdadc/ptocalc/tarball/master">
-        <img border="0" width="90" src="https://github.com/images/modules/download/tar.png"></a>
-    </div>
-
-    <h1><a href="https://github.com/tirdadc/ptocalc">ptocalc</a>
-      <span class="small">by <a href="https://github.com/tirdadc">tirdadc</a></span></h1>
-
-    <div class="description">
-      JS PTO calculator
-    </div>
-
+  <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>PTOCALC</title>
+    <!-- <link rel="stylesheet" href="css/main.css" type="text/css" /> -->
+    <link rel="stylesheet" type="text/css" href="bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="jquery-ui/css/smoothness/jquery-ui-1.8.16.custom.css">
+    <link rel="stylesheet" type="text/css" href="ptocalc.css">
     
+    <script type='text/javascript' src='jquery/jquery-1.6.4.min.js'></script>
+    <script type='text/javascript' src='bootstrap/js/bootstrap-alerts.js'></script>
+    <script type='text/javascript' src='jquery-ui/js/jquery-ui-1.8.16.custom.min.js'></script>
+    <script type='text/javascript' src='ptocalc.js'></script>
+  </head>
 
+  <body>
     
+    <div class="container">
+        
+        <div class="page-header">
+          <h1>PTOCALC <small>because time off is good for you.</small></h1>
+        </div>
+        
+        <div class="row">
+          <div class="">
 
-    
+            <form>
+              <div class="clearfix">
+                <label for="startDate">Started work on</label>
+                <div class="input">
+                  <div class="inline-inputs">                    
+                    <input type="text" value="" class="span2 datepicker" id="startDate" name="startDate">
+                  </div>
+                  <span class="help-block">Start date in MM/DD/YYYY format.</span>
+                </div>
+              </div>
+              
+              <div class="clearfix">
+                <label for="startPTO">With</label>
+                <div class="input">
+                  <div class="inline-inputs">                    
+                    <input type="number" step="0.5" value="15" class="span2" id="startPTO" name="startPTO">
+                    <span>days off</span>
+                  </div>
+                  <span class="help-block">Enter this in half-day (0.5) increments.</span>
+                </div>
+              </div>
+              
+              <div class="clearfix">
+                <label for="usedPTO">PTO used so far</label>
+                <div class="input">
+                  <input type="number" step="0.5" value="0" class="span2" id="usedPTO" name="usedPTO">
+                  <span class="help-block">Enter this in half-day (0.5) increments.</span>
+                </div>
+              </div>
+              
+              <div class="clearfix">
+                <label for="bonusPTO">Bonus PTO</label>
+                <div class="input">
+                  <input type="number" step="0.5" value="0" class="span2" id="bonusPTO" name="bonusPTO">
+                  <span class="help-block">Use this for personal days or anything that doesn't accrue over time. Enter this in half-day (0.5) increments.</span>
+                </div>
+              </div>
+              
+              <div class="clearfix">
+                <label for="extraPTO">Extra PTO per year</label>
+                <div class="input">
+                  <input type="text" value="0" class="span2" id="extraPTO" name="extraPTO">
+                  <span class="help-block">Enter this in half-day (0.5) increments.</span>
+                </div>
+              </div>
+              
+              <div id="results"></div>
+              
+              <div class="actions">
+                <p>
+                  <input type="submit" value="Do the math" class="btn primary">
+                  <button class="btn danger" type="reset">Reset</button>
+                </p>
+                <p class="settings" style="display: none;">
+                  <button id="save" class="btn success">Save settings</button>
+                  <button id="load" class="btn info">Load settings</button>
+                </p>
+                <p>
+                  <button id="showoptions" class="btn info">Show configuration options</button>
+                </p>
+              </div>
+              
+              
+              
+                
+              
+              
+            </form>
+            
+          </div>
+        </div>
+      
 
-    
+      <footer>
+        <p>&ne; PTOCALC 2011</p>
+        <p>Built with Javascript, <a href="http://jquery.com/">jQuery</a>, <a href="http://jqueryui.com/">jQuery UI</a> and <a href="http://twitter.github.com/bootstrap/">Bootstrap</a>.</p>
+      </footer>
 
-    
-      <h2>Authors</h2>
-      <p>tirdadc (tirdadck@gmail.com)<br/>      </p>
-    
-
-    
-      <h2>Contact</h2>
-      <p> (tirdadck@gmail.com)<br/>      </p>
-    
-
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="https://github.com/tirdadc/ptocalc/zipball/master">zip</a> or
-      <a href="https://github.com/tirdadc/ptocalc/tarball/master">tar formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/tirdadc/ptocalc</pre>
-    </p>
-
-    <div class="footer">
-      get the source code on GitHub : <a href="https://github.com/tirdadc/ptocalc">tirdadc/ptocalc</a>
-    </div>
-
-  </div>
-
-</body>
+    </div> <!-- /container -->
+  
+  </body>
 </html>
