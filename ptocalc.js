@@ -20,9 +20,10 @@ function getTimeWorked(startDate) {
 function getTotalPTO(user) {
   var timeWorked = getTimeWorked(user.startDate);
   var ptoTotal = 0;
+  var ptoPerYear = user.startingPTO;
   
   // Full years
-  for (year = 0; year <= timeWorked.years; year++) {
+  for (year = 0; year < timeWorked.years; year++) {
     ptoPerYear = user.startingPTO + (year * user.extraPTOperYear);
     ptoTotal += ptoPerYear;
   }
