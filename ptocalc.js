@@ -17,12 +17,12 @@ function getTimeWorked(startDate) {
   return timeWorked;
 }
 
-function getTotalPTO(user) { 
+function getTotalPTO(user) {
   var timeWorked = getTimeWorked(user.startDate);
   var ptoTotal = 0;
   
   // Full years
-  for (year = 0; year < timeWorked.years; year++) {
+  for (year = 0; year <= timeWorked.years; year++) {
     ptoPerYear = user.startingPTO + (year * user.extraPTOperYear);
     ptoTotal += ptoPerYear;
   }
@@ -49,10 +49,10 @@ function getRemainingPTO(user) {
       }
     } else {      
       if (!isNumber(user[key])) {
-        return false;
+		user[key] = 0;
       }
     }
-  }  
+  }
   var ptoTotal = getTotalPTO(user);
   return ptoTotal - user.ptoTaken;
 }
@@ -190,6 +190,24 @@ $(function() {
   if (hasStorage) {
     $( '.settings' ).show();
   }
+  
+  /*
+  $( "#xptomanual" ).click(function(e) {
+    $( this ).toggleClass("active");
+    $( "#extraPTOCont" ).empty();
+    $('<input type="number" />').attr({
+      "id": "extraPTO",
+      "name": "extraPTO",
+      "size": "0",
+      "step": "0.5",
+      "class": "span2"
+    }).appendTo($("#extraPTOCont"));
+  });
+  
+  $( "#xptoauto" ).click(function(e) {
+    $( this ).toggleClass("active");
+  });
+  */
   
 });
 	

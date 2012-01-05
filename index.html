@@ -10,6 +10,7 @@
     
     <script type='text/javascript' src='jquery/jquery-1.6.4.min.js'></script>
     <script type='text/javascript' src='bootstrap/js/bootstrap-alerts.js'></script>
+    <script type='text/javascript' src='bootstrap/js/bootstrap-twipsy.js'></script>
     <script type='text/javascript' src='jquery-ui/js/jquery-ui-1.8.16.custom.min.js'></script>
     <script type='text/javascript' src='ptocalc.js'></script>
   </head>
@@ -65,11 +66,33 @@
               
               <div class="clearfix">
                 <label for="extraPTO">Extra PTO per year</label>
-                <div class="input">
-                  <input type="text" value="0" class="span2" id="extraPTO" name="extraPTO">
-                  <span class="help-block">Enter this in half-day (0.5) increments.</span>
+                <div id="extraPTOCont" class="input">
+                  <input type="number" step="0.5" size="0" name="extraPTO" id="extraPTO" class="span2">
                 </div>
               </div>
+              
+              <div class="clearfix">
+              <label>Set extra PTO per year</label>
+              <div class="input">
+                <ul class="inputs-list">
+                  <li>
+                    <label>
+                      <input type="radio" id="xptoauto" value="auto" name="confextraPTO" checked="">
+                      <span>using the value above for each year</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label>
+                      <input type="radio" id="xptomanual" value="manual" name="confextraPTO">
+                      <span>with a different value for each year</span>
+                    </label>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          
+              
+              
               
               <div id="results"></div>
               
@@ -100,7 +123,7 @@
 
       <footer>
         <p>&ne; PTOCALC 2011</p>
-        <p>Built with Javascript, <a href="http://jquery.com/">jQuery</a>, <a href="http://jqueryui.com/">jQuery UI</a> and <a href="http://twitter.github.com/bootstrap/">Bootstrap</a>.</p>
+        <p>Built with HTML5, Javascript, <a href="http://jquery.com/">jQuery</a>, <a href="http://jqueryui.com/">jQuery UI</a> and <a href="http://twitter.github.com/bootstrap/">Bootstrap</a>.</p>
       </footer>
 
     </div> <!-- /container -->
