@@ -20,6 +20,7 @@ function getTimeWorked(startDate) {
 function getTotalPTO(user) {
   var timeWorked = getTimeWorked(user.startDate);
   var ptoTotal = 0;  
+  var ptoPerYear = user.startingPTO;
   
   // Full years
   for (year = 0; year < timeWorked.years; year++) {
@@ -114,7 +115,7 @@ $(function() {
     var message = document.createElement('div');
     message.setAttribute('id', 'message');
     
-    if (!PTOleft) {
+    if (PTOleft === false) {
       message.setAttribute('class', 'alert-message error');
       message.textContent = 'Blarghghh! Does not compute, recheck your values.';
     }
@@ -122,9 +123,13 @@ $(function() {
       message.setAttribute('class', 'alert-message success');
       message.textContent  = 'You have ' + PTOleft.toFixed(2) + ' days of PTO left. Time to use some.';
     }
-    else if (PTOleft > 1 && PTOleft < 5) {
+    else if (PTOleft > 0 && PTOleft < 5) {
       message.setAttribute('class', 'alert-message warning');
       message.textContent  = 'You still have ' + PTOleft.toFixed(2) + ' days of PTO left. It could be worse.';
+    }
+	else if (PTOleft === 0) {
+      message.setAttribute('class', 'alert-message warning');
+      message.textContent  = 'You have no PTO yet. Wait for it.';
     }
     else if (PTOleft < 0) {
       message.setAttribute('class', 'alert-message error');
