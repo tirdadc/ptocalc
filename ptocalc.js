@@ -118,11 +118,7 @@ $(function() {
   });
   
   // Set end date to today by default
-  //$( "#endDate" ).datepicker('setDate', new Date());
-  $( "#endDate" ).datepicker({
-    setDate: new Date(),
-	minDate: new Date(),
-  });
+  $( "#endDate" ).datepicker('setDate', new Date());  
   
   $( "input.primary" ).click(function(e) {
     e.preventDefault();
