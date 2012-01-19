@@ -1,3 +1,7 @@
+PTOCALC.JS by Tirdad C.
+
+Online at http://tirdadc.github.com/ptocalc/
+
 TODO list:
 
 * -allow user to enter a custom end date for the calculation-
