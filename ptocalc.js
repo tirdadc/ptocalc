@@ -1,13 +1,18 @@
 /**
 * Return an object with the years + months since the start date
 */
-function getTimeWorked(startDate) {
-  var today = new Date();
+function getTimeWorked(startDate, endDate) {
+  if (endDate.getTime() < startDate.getTime()) {
+    return {
+      years: 0,
+      months: 0
+    };
+  }
   
   var one_day = 1 * 1000 * 60 * 60 * 24;
-  var one_year = one_day = 365 * one_day; // Yeah, yeah, screw leap years, DWI
+  var one_year = one_day = 365 * one_day; // Yeah, yeah, screw leap years, DWI (TODO: fix it at some point or switch to date.js)
   
-  var diff = today.getTime() - startDate.getTime();
+  var diff = endDate.getTime() - startDate.getTime();
   var diffYears = Math.floor(diff/one_year);
   
   timeWorked = {
@@ -18,7 +23,7 @@ function getTimeWorked(startDate) {
 }
 
 function getTotalPTO(user) {
-  var timeWorked = getTimeWorked(user.startDate);
+  var timeWorked = getTimeWorked(user.startDate, user.endDate);
   var ptoTotal = 0;  
   var ptoPerYear = user.startingPTO;
   
@@ -44,8 +49,8 @@ function isNumber(n) {
 
 function getRemainingPTO(user) {
   for (var key in user) {
-    if (key == 'startDate') {
-      if (!user.startDate || isNaN(user.startDate)) {
+    if (key == 'startDate' || key == 'endDate') {
+	  if (!user[key] || isNaN(user[key])) {
         return false;
       }
     } else {      
@@ -82,13 +87,18 @@ test2 = {
 };
 */
 
+// Utility function that takes an element id and returns a date object
+function _formDateToObj(id) {
+  var date = $( id ).val();
+  return new Date(Date.parse(date));
+}
+
 // Fetch and validate data from form
 function getFormData() {
   var data = {};
-  data.startDate = $( "#startDate" ).val();
-  data.startDate = Date.parse(data.startDate);
-  data.startDate = new Date(data.startDate);
-  
+
+  data.startDate = _formDateToObj("#startDate");
+  data.endDate = _formDateToObj("#endDate");
   data.startingPTO = parseFloat($( "#startPTO" ).val());
   data.ptoTaken = parseFloat($( "#usedPTO" ).val());
   data.bonusPTO = parseFloat($( "#bonusPTO" ).val());
@@ -104,7 +114,14 @@ $(function() {
   // Set up jQuery UI datepicker
   $( ".datepicker" ).datepicker({
     changeMonth: true,
-    changeYear: true
+    changeYear: true,
+  });
+  
+  // Set end date to today by default
+  //$( "#endDate" ).datepicker('setDate', new Date());
+  $( "#endDate" ).datepicker({
+    setDate: new Date(),
+	minDate: new Date(),
   });
   
   $( "input.primary" ).click(function(e) {
